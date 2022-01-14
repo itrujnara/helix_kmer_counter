@@ -3,9 +3,9 @@
 params.kmer = 3
 params.fasta = "/data/seqence.fa"
 
-process findHelices {
+process findSequences {
     input:
-    file "sequence.fa" from params.fasta
+    file "prediction.txt" from params.fasta
     
     output:
     file "matches.txt" into matches_ch
@@ -13,7 +13,7 @@ process findHelices {
     script:
     """
     #!/usr/bin/env python
-    #todo, possibly Alessio's
+    # paste selector script here when ready
     """
 }
 
@@ -27,7 +27,7 @@ process extractSequences {
     script:
     """
     #!/usr/bin/env python
-    #todo
+    # todo
     """
 }
 
@@ -38,6 +38,6 @@ process countKmers {
     script:
     """
     #!/usr/bin/env python
-    #todo
+    # todo
     """
 }
