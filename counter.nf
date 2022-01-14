@@ -8,7 +8,7 @@ process findHelices {
     file "sequence.fa" from params.fasta
     
     output:
-    file "matches.fa" into matches_ch
+    file "matches.txt" into matches_ch
     
     script:
     """
@@ -19,7 +19,7 @@ process findHelices {
 
 process extractSequences {
     input:
-    file "matches.fa" from matches_ch
+    file "matches.txt" from matches_ch
     
     output:
     file "seqs.fa" into seq_ch
