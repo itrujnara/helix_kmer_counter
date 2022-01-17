@@ -1,14 +1,17 @@
 #!/usr/bin/env nextflow
 
+nextflow.enable.dsl = 2
+
 params.kmer = 3
 params.fasta = "/data/seqence.fa"
+params.pred = "/data/prediction.txt"
 
 process findSequences {
     input:
-    file "prediction.txt" from params.fasta
+    path "prediction.txt"
     
     output:
-    file "matches.txt" into matches_ch
+    stdout
     
     script:
     """
@@ -19,10 +22,11 @@ process findSequences {
 
 process extractSequences {
     input:
-    file "matches.txt" from matches_ch
+    stdin
+    path "inseqs.fa"
     
     output:
-    file "seqs.fa" into seq_ch
+    stdout
     
     script:
     """
@@ -33,11 +37,17 @@ process extractSequences {
 
 process countKmers {
     input:
-    file "seqs.fa" from seq_ch
+    stdin
     
     script:
     """
     #!/usr/bin/env python
     # todo
     """
+}
+
+workflow {
+    findSequences(params.pred)
+    extractSequences(findSequences.out, params.fasta)
+    countKmers(extractSequences.out)
 }
