@@ -1,0 +1,79 @@
+Jan-18 17:28:02.655 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ../counter.nf --pred sample_phobius.txt --fasta test_data/sample_fasta.fa
+Jan-18 17:28:02.714 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+Jan-18 17:28:02.735 [main] INFO  nextflow.cli.CmdRun - Launching `../counter.nf` [pensive_caravaggio] - revision: be90c4261b
+Jan-18 17:28:02.748 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/igor/Programming/CRG/helix_kmer_counter/nextflow.config
+Jan-18 17:28:02.750 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/igor/Programming/CRG/helix_kmer_counter/nextflow.config
+Jan-18 17:28:02.778 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jan-18 17:28:03.340 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/home/igor/.nextflow/plugins
+Jan-18 17:28:03.342 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-18 17:28:03.350 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-18 17:28:03.351 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-18 17:28:03.354 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-18 17:28:03.363 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-18 17:28:03.409 [main] DEBUG nextflow.Session - Session uuid: 29604b9a-c930-42b0-a371-a869bda62086
+Jan-18 17:28:03.409 [main] DEBUG nextflow.Session - Run name: pensive_caravaggio
+Jan-18 17:28:03.409 [main] DEBUG nextflow.Session - Executor pool size: 8
+Jan-18 17:28:03.435 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (17:55 CEST)
+  System: Linux 5.11.0-46-generic
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 11.0.13+8-Ubuntu-0ubuntu1.20.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 26202@triggor-computer [127.0.1.1]
+  CPUs: 8 - Mem: 31.1 GB (25.8 GB) - Swap: 2 GB (2 GB)
+Jan-18 17:28:03.452 [main] DEBUG nextflow.Session - Work-dir: /home/igor/Programming/CRG/helix_kmer_counter/test_data/work [ext2/ext3]
+Jan-18 17:28:03.464 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-18 17:28:03.477 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-18 17:28:03.513 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 17:28:03.595 [main] DEBUG nextflow.Session - Session start invoked
+Jan-18 17:28:03.956 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-18 17:28:04.058 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 17:28:04.138 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 17:28:04.139 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 17:28:04.145 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jan-18 17:28:04.152 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=31.1 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Jan-18 17:28:04.240 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 17:28:04.240 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 17:28:04.246 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 17:28:04.247 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 17:28:04.251 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: countHelixKmers:findSequences, extractSequences, countHelixKmers:extractSequences, countKmers, countHelixKmers:countKmers, findSequences
+Jan-18 17:28:04.252 [main] DEBUG nextflow.Session - Ignite dataflow network (4)
+Jan-18 17:28:04.261 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:findSequences
+Jan-18 17:28:04.262 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:extractSequences
+Jan-18 17:28:04.262 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:countKmers
+Jan-18 17:28:04.263 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Jan-18 17:28:04.263 [main] DEBUG nextflow.Session - Session await
+Jan-18 17:28:04.330 [Actor Thread 7] ERROR nextflow.processor.TaskProcessor - Error executing process > 'countHelixKmers:findSequences'
+
+Caused by:
+  Not a valid path value: sample_phobius.txt
+
+
+Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+Jan-18 17:28:04.335 [Actor Thread 7] DEBUG nextflow.Session - Session aborted -- Cause: Not a valid path value: sample_phobius.txt
+Jan-18 17:28:04.349 [Actor Thread 7] DEBUG nextflow.Session - The following nodes are still active:
+[process] countHelixKmers:findSequences
+  status=ACTIVE
+  port 0: (value) bound ; channel: pyscript
+  port 1: (value) bound ; channel: pred
+  port 2: (value) bound ; channel: feature
+  port 3: (cntrl) -     ; channel: $
+
+[process] countHelixKmers:extractSequences
+  status=ACTIVE
+  port 0: (value) bound ; channel: pyscript
+  port 1: (value) OPEN  ; channel: ranges
+  port 2: (value) bound ; channel: fasta
+  port 3: (cntrl) -     ; channel: $
+
+[process] countHelixKmers:countKmers
+  status=ACTIVE
+  port 0: (value) OPEN  ; channel: seqs
+  port 1: (value) bound ; channel: kmer
+  port 2: (cntrl) -     ; channel: $
+
+Jan-18 17:28:04.351 [main] DEBUG nextflow.Session - Session await > all process finished
+Jan-18 17:28:04.351 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-18 17:28:04.356 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Jan-18 17:28:04.546 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Jan-18 17:28:04.552 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

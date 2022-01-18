@@ -1,1 +1,41 @@
 2022-01-17 16:18:22	1.8s	reverent_hamilton	OK	2bbce248905012be225c7e2121ebbc5a	4c17452c-e078-4153-b4c4-d0fbc19f1649	nextflow counter.nf
+2022-01-18 11:47:39	-	festering_wozniak	-	5c52031c8c68ab4ee1c1230a36b86c2b	1495e3a2-428c-4779-ae93-94d04a2af030	nextflow counter.nf --fasta sample_fasta.fa --pred sample_phobius.txt
+2022-01-18 11:48:00	1.1s	marvelous_hugle	ERR	1419bdf003b1b36fdef9add12507b45f	be70088c-ca1d-42f0-a6f7-088149af9e68	nextflow counter.nf --fasta sample_fasta.fa --pred sample_phobius.txt
+2022-01-18 11:51:58	1.3s	admiring_payne	ERR	1419bdf003b1b36fdef9add12507b45f	7a686a11-b680-4bd3-a6ac-8ca3e51b41ae	nextflow counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+2022-01-18 11:54:52	1.6s	magical_fourier	ERR	1419bdf003b1b36fdef9add12507b45f	a83881bd-62ff-4d74-a8a4-584513f4cb9f	nextflow counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+2022-01-18 12:16:22	1.9s	determined_mcnulty	ERR	d582d9fbdb9834a7197a895e5b5ea951	4da54773-1ec1-4720-95a2-c11a3f5ec2b3	nextflow counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+2022-01-18 12:21:51	1.3s	boring_lamarr	ERR	508b4fc09fba3629bf9d9c74e77fd486	4ff4d1bc-d003-41c0-a857-89fcbb10d9e2	nextflow counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+2022-01-18 12:25:22	1.2s	suspicious_swartz	ERR	508b4fc09fba3629bf9d9c74e77fd486	458cad04-5e85-4d09-83ba-e482c46f01aa	nextflow counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+2022-01-18 12:25:50	1.5s	insane_torricelli	OK	ec11eb0ec77b9f95425695824ca01ffb150699ae	7fd0d62f-3393-4eba-a027-5cc77fc7a323	nextflow run hello
+2022-01-18 12:26:13	1.8s	astonishing_mandelbrot	ERR	508b4fc09fba3629bf9d9c74e77fd486	53d41774-5eea-495b-9ebf-de783d877ff4	nextflow run counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+2022-01-18 16:31:32	-	insane_banach	-	78b2dfc58cb3b7c3b61823a524f82237	eea931b6-c6b0-47e0-b72a-58199bc6bc00	nextflow run counter.nf --pred sample_phobius.txt --fasta sample_fasta.fa
+2022-01-18 16:32:39	-	reverent_mirzakhani	-	78b2dfc58cb3b7c3b61823a524f82237	da9ea556-22a1-44f6-b147-ebeff69cee4b	nextflow run counter.nf --pred sample_phobius.txt --fasta sample_fasta.fa
+2022-01-18 16:36:21	1.8s	desperate_ride	ERR	8d4fc0cbaa93b2d5e120b840748acb4c	b1fd8f3f-54c3-4190-8b88-d9947c240103	nextflow run counter.nf --pred sample_phobius.txt --fasta sample_fasta.fa
+2022-01-18 16:37:04	2s	jolly_koch	ERR	8d4fc0cbaa93b2d5e120b840748acb4c	f613ab97-c2b2-4d4d-b415-5da45f7f6dbc	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 16:38:16	1.6s	lethal_majorana	ERR	acb12532b355049a0672ebbb2d1dc8f1	81d7f6d0-8384-40cb-b855-ffac9e403358	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 16:42:59	1.6s	condescending_kare	ERR	acb12532b355049a0672ebbb2d1dc8f1	c8bc2a6c-1e1c-4055-bcf2-4314fe4c81af	nextflow run counter.nf --pred .txt --fasta .fa
+2022-01-18 16:43:15	1.6s	silly_thompson	ERR	acb12532b355049a0672ebbb2d1dc8f1	5139d68b-38df-437c-92d6-980cd4bc15ad	nextflow run counter.nf --pred ' sample_phobius.txt' --fasta ' sample_fasta.fa'
+2022-01-18 16:43:29	1.6s	determined_poincare	ERR	acb12532b355049a0672ebbb2d1dc8f1	22000eb4-76bb-4446-9d16-c5b6800124a4	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 16:44:20	1.7s	focused_pesquet	ERR	acb12532b355049a0672ebbb2d1dc8f1	2f69bcec-6d94-46a3-97c1-d8d52e73962d	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 16:46:09	2.2s	kickass_mcnulty	ERR	acb12532b355049a0672ebbb2d1dc8f1	a5682578-ed1c-4c4e-95e3-672eab2a9257	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 17:05:22	1.8s	exotic_gautier	ERR	c78178714ce85808f446e316c2cdb4b9	eb98fb58-488f-476b-a4d2-326373010da7	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 17:09:52	2.2s	sleepy_northcutt	ERR	84e5e9a2be2e38aa546cd50902e8d27b	39c0adea-0dfd-4589-8d86-2829ecad7734	nextflow run counter.nf --pred /sample_phobius.txt --fasta /sample_fasta.fa
+2022-01-18 17:16:24	953ms	amazing_austin	ERR	84e5e9a2be2e38aa546cd50902e8d27b	90f6d9a7-c99e-46ea-89c4-df8a27bcbd7c	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:22:14	1.2s	tender_albattani	ERR	84e5e9a2be2e38aa546cd50902e8d27b	7be9568b-1ae2-4e45-a818-ccd849b0144d	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:24:24	-	evil_galileo	-	2afb1884ec3e189ae7149b04ac9a7ca4	b9d442da-e780-4909-a1cd-abfdc88aacdf	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:24:46	-	goofy_bohr	-	9c325b157e081c632f5caec0def41378	9f0f5f8f-56ec-4cca-b7a7-d8699889707c	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:25:09	1.7s	serene_shockley	ERR	be90c4261bfe23f5ca1922728c925821	9578e080-c23a-4220-950b-32c2e369ed3d	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:32:03	2s	special_baekeland	ERR	be90c4261bfe23f5ca1922728c925821	6a9fa287-0d7f-46f5-82b6-ee8f0c59d372	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:33:28	1.5s	lonely_kilby	ERR	be90c4261bfe23f5ca1922728c925821	55ff2769-542d-427a-8b5c-a57de9f314ba	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:35:43	808ms	nice_knuth	OK	136c31c3de2ca1f6c83304f6d14d4ce9	09d22b23-d2e4-4eca-ab9c-dfd2c0430360	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:37:11	1.6s	wise_euler	OK	136c31c3de2ca1f6c83304f6d14d4ce9	206d94a4-4d51-4e78-94ce-142c017c6a7b	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:37:25	1.3s	agitated_ritchie	ERR	afdccca316cc993dfcd039b3ed8d8e93	5bf358a5-1829-4e90-8c04-1c4f270335ac	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:38:20	1.8s	sleepy_miescher	ERR	194e69c781a3f692b9c7f5de721b4229	433d6e62-f7ee-48b9-9c9a-2cd4411ea69f	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:39:14	1.7s	friendly_kirch	ERR	e33a998b3ee654acd6f39a1a486ea564	7751efee-3f9a-4dd1-8807-db7cf1a4aef7	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:40:14	1.9s	gigantic_hawking	ERR	7ae1d7753ca2a6629891db38e6573f6d	fcbad049-1afb-4135-94ae-7fcc16007373	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 17:41:52	2s	sad_allen	ERR	0689ea6a9c1861cb7437296d48d9d93b	d660c1d6-8572-4063-8464-95b297a6571d	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 18:44:48	-	ecstatic_jepsen	-	d9a3b697f249406b637240eec233a4f9	b453f642-4d40-4a3e-9124-ac1f6fd7e7fe	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 18:45:46	924ms	prickly_babbage	ERR	a79e0dd585e1b56973db01d671f027f9	e8259825-64d0-47f4-84b3-00b08cf4ea6d	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 18:47:07	1.3s	zen_pauling	ERR	206a146cc79e8d91cb584d307304e6e7	9bf123cb-6845-4c99-97ed-bba342745a67	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 18:47:48	1.4s	modest_spence	ERR	b6aeb63030dd99a49810b6c549996f11	9c8e2256-ab78-41dc-9784-b672b513d941	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+2022-01-18 18:48:41	1.5s	goofy_noether	ERR	e5a2de9df44f5aa52525258aceea18bd	ead29521-04bb-431c-815d-74cfa10b7dc4	nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa

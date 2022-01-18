@@ -1,0 +1,77 @@
+Jan-18 17:28:46.293 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ../counter.nf --pred /home/igor/Programming/CRG/helix_kmer_counter/test_data/sample_phobius.txt --fasta /home/igor/Programming/CRG/helix_kmer_counter/test_data/sample_fasta.fa
+Jan-18 17:28:46.377 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+Jan-18 17:28:46.404 [main] INFO  nextflow.cli.CmdRun - Launching `../counter.nf` [angry_descartes] - revision: be90c4261b
+Jan-18 17:28:46.421 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/igor/Programming/CRG/helix_kmer_counter/nextflow.config
+Jan-18 17:28:46.423 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/igor/Programming/CRG/helix_kmer_counter/nextflow.config
+Jan-18 17:28:46.451 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jan-18 17:28:47.092 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/home/igor/.nextflow/plugins
+Jan-18 17:28:47.093 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-18 17:28:47.101 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-18 17:28:47.102 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-18 17:28:47.105 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-18 17:28:47.114 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-18 17:28:47.160 [main] DEBUG nextflow.Session - Session uuid: 630304e1-607c-4f9c-ac17-eead4f318035
+Jan-18 17:28:47.160 [main] DEBUG nextflow.Session - Run name: angry_descartes
+Jan-18 17:28:47.161 [main] DEBUG nextflow.Session - Executor pool size: 8
+Jan-18 17:28:47.188 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (17:55 CEST)
+  System: Linux 5.11.0-46-generic
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 11.0.13+8-Ubuntu-0ubuntu1.20.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 26308@triggor-computer [127.0.1.1]
+  CPUs: 8 - Mem: 31.1 GB (25.9 GB) - Swap: 2 GB (2 GB)
+Jan-18 17:28:47.205 [main] DEBUG nextflow.Session - Work-dir: /home/igor/Programming/CRG/helix_kmer_counter/test_data/work [ext2/ext3]
+Jan-18 17:28:47.217 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-18 17:28:47.228 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-18 17:28:47.252 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 17:28:47.316 [main] DEBUG nextflow.Session - Session start invoked
+Jan-18 17:28:47.637 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-18 17:28:47.707 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 17:28:47.772 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 17:28:47.772 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 17:28:47.776 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jan-18 17:28:47.781 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=31.1 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Jan-18 17:28:47.845 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 17:28:47.845 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 17:28:47.850 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 17:28:47.850 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 17:28:47.853 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: countHelixKmers:findSequences, extractSequences, countHelixKmers:extractSequences, countKmers, countHelixKmers:countKmers, findSequences
+Jan-18 17:28:47.853 [main] DEBUG nextflow.Session - Ignite dataflow network (4)
+Jan-18 17:28:47.858 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:findSequences
+Jan-18 17:28:47.859 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:extractSequences
+Jan-18 17:28:47.861 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:countKmers
+Jan-18 17:28:47.866 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Jan-18 17:28:47.866 [main] DEBUG nextflow.Session - Session await
+Jan-18 17:28:48.004 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-18 17:28:48.008 [Task submitter] INFO  nextflow.Session - [58/fdec9d] Submitted process > countHelixKmers:findSequences
+Jan-18 17:28:48.057 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: countHelixKmers:findSequences; status: COMPLETED; exit: 0; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/test_data/work/58/fdec9d68d30fddc9872467fe5aa93f]
+Jan-18 17:28:48.085 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-18 17:28:48.085 [Task submitter] INFO  nextflow.Session - [d5/539351] Submitted process > countHelixKmers:extractSequences
+Jan-18 17:28:48.127 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: countHelixKmers:extractSequences; status: COMPLETED; exit: 0; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/test_data/work/d5/539351b95e710320e64f6200c6adb8]
+Jan-18 17:28:48.139 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'countHelixKmers:extractSequences'
+
+Caused by:
+  Missing output file(s) `seqs_*.txt` expected by process `countHelixKmers:extractSequences`
+
+Command executed:
+
+  #!/usr/bin/env bash
+  python3 extract_seqs.py seq_ranges_sample_phobius.txt sample_fasta.fa "seqs_seq_ranges_sample_phobius.txt.txt"
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /home/igor/Programming/CRG/helix_kmer_counter/test_data/work/d5/539351b95e710320e64f6200c6adb8
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Jan-18 17:28:48.145 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Missing output file(s) `seqs_*.txt` expected by process `countHelixKmers:extractSequences`
+Jan-18 17:28:48.151 [main] DEBUG nextflow.Session - Session await > all process finished
+Jan-18 17:28:48.159 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-18 17:28:48.167 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=4ms; failedDuration=2ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Jan-18 17:28:48.353 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Jan-18 17:28:48.363 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

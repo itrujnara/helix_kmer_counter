@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/igor/Programming/CRG/helix_kmer_counter/find_seqs.py", line 13, in <module>
+    find_sequences(infile, outfile, feature)
+  File "/home/igor/Programming/CRG/helix_kmer_counter/find_seqs.py", line 5, in find_sequences
+    with open(infile, 'r') as inf:
+FileNotFoundError: [Errno 2] No such file or directory: '/sample_phobius.txt'

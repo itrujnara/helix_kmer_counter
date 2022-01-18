@@ -1,0 +1,73 @@
+Jan-18 11:48:00.090 [main] DEBUG nextflow.cli.Launcher - $> nextflow counter.nf --fasta sample_fasta.fa --pred sample_phobius.txt
+Jan-18 11:48:00.126 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+Jan-18 11:48:00.138 [main] INFO  nextflow.cli.CmdRun - Launching `counter.nf` [marvelous_hugle] - revision: 1419bdf003
+Jan-18 11:48:00.182 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/home/igor/.nextflow/plugins
+Jan-18 11:48:00.183 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-18 11:48:00.189 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-18 11:48:00.189 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-18 11:48:00.191 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-18 11:48:00.196 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-18 11:48:00.223 [main] DEBUG nextflow.Session - Session uuid: be70088c-ca1d-42f0-a6f7-088149af9e68
+Jan-18 11:48:00.223 [main] DEBUG nextflow.Session - Run name: marvelous_hugle
+Jan-18 11:48:00.223 [main] DEBUG nextflow.Session - Executor pool size: 8
+Jan-18 11:48:00.240 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (17:55 CEST)
+  System: Linux 5.11.0-46-generic
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 11.0.13+8-Ubuntu-0ubuntu1.20.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 9101@triggor-computer [127.0.1.1]
+  CPUs: 8 - Mem: 31.1 GB (25.6 GB) - Swap: 2 GB (2 GB)
+Jan-18 11:48:00.251 [main] DEBUG nextflow.Session - Work-dir: /home/igor/Programming/CRG/helix_kmer_counter/work [ext2/ext3]
+Jan-18 11:48:00.251 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/igor/Programming/CRG/helix_kmer_counter/bin
+Jan-18 11:48:00.255 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-18 11:48:00.261 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-18 11:48:00.276 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 11:48:00.320 [main] DEBUG nextflow.Session - Session start invoked
+Jan-18 11:48:00.679 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-18 11:48:00.740 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 11:48:00.740 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 11:48:00.743 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jan-18 11:48:00.746 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=31.1 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Jan-18 11:48:00.759 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 11:48:00.806 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 11:48:00.806 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 11:48:00.808 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 11:48:00.808 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 11:48:00.811 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: extractSequences, countKmers, findSequences
+Jan-18 11:48:00.811 [main] DEBUG nextflow.Session - Ignite dataflow network (3)
+Jan-18 11:48:00.811 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > findSequences
+Jan-18 11:48:00.811 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > extractSequences
+Jan-18 11:48:00.812 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countKmers
+Jan-18 11:48:00.812 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Jan-18 11:48:00.812 [main] DEBUG nextflow.Session - Session await
+Jan-18 11:48:00.846 [Actor Thread 5] ERROR nextflow.processor.TaskProcessor - Error executing process > 'findSequences'
+
+Caused by:
+  Not a valid path value: sample_phobius.txt
+
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+Jan-18 11:48:00.849 [Actor Thread 5] DEBUG nextflow.Session - Session aborted -- Cause: Not a valid path value: sample_phobius.txt
+Jan-18 11:48:00.858 [Actor Thread 5] DEBUG nextflow.Session - The following nodes are still active:
+[process] findSequences
+  status=ACTIVE
+  port 0: (value) bound ; channel: prediction.txt
+  port 1: (cntrl) -     ; channel: $
+
+[process] extractSequences
+  status=ACTIVE
+  port 0: (value) OPEN  ; channel: -
+  port 1: (value) bound ; channel: inseqs.fa
+  port 2: (cntrl) -     ; channel: $
+
+[process] countKmers
+  status=ACTIVE
+  port 0: (value) OPEN  ; channel: -
+  port 1: (cntrl) -     ; channel: $
+
+Jan-18 11:48:00.859 [main] DEBUG nextflow.Session - Session await > all process finished
+Jan-18 11:48:00.860 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-18 11:48:00.863 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Jan-18 11:48:01.066 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Jan-18 11:48:01.073 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
