@@ -7,7 +7,7 @@ def extract_seqs(seq, ints): # separated to limit indentation
     bpts = list(itertools.chain.from_iterable(ints))
     write = False
     for i, c in enumerate(seq): # todo: what indexing in Phobius
-        if i in bpts:
+        if (i + 1) in bpts:
             write = not write # start/stop reading sequence
             if not write: # save and reset at the end of sequence
                 seqs.append(current)
@@ -25,7 +25,7 @@ with open("sample_fasta.fa", 'r') as inseqs: # todo: change file name to "inseqs
         found = False
         for sl in inseqs:
             if found:
-                print('\t'.join(extract_seqs(sl, ints)))
+                print(uid + '\t' + '\t'.join(extract_seqs(sl, ints)))
                 break
             elif sl.split()[0][1:] == uid:
                 found = True

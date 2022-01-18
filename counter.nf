@@ -5,6 +5,7 @@ nextflow.enable.dsl = 2
 params.kmer = 3
 params.fasta = "/data/seqence.fa"
 params.pred = "/data/prediction.txt"
+params.outfile = "/results/kmers.txt"
 
 process findSequences {
     input:
@@ -16,7 +17,7 @@ process findSequences {
     script:
     """
     #!/usr/bin/env python
-    # paste selector script here when ready
+    # todo: paste
     """
 }
 
@@ -31,7 +32,7 @@ process extractSequences {
     script:
     """
     #!/usr/bin/env python
-    # todo
+    # todo: paste
     """
 }
 
