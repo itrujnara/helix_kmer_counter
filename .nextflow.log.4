@@ -1,0 +1,85 @@
+Jan-18 11:51:58.266 [main] DEBUG nextflow.cli.Launcher - $> nextflow counter.nf --fasta /sample_fasta.fa --pred /sample_phobius.txt
+Jan-18 11:51:58.302 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+Jan-18 11:51:58.313 [main] INFO  nextflow.cli.CmdRun - Launching `counter.nf` [admiring_payne] - revision: 1419bdf003
+Jan-18 11:51:58.356 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/home/igor/.nextflow/plugins
+Jan-18 11:51:58.356 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-18 11:51:58.362 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-18 11:51:58.362 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-18 11:51:58.364 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-18 11:51:58.369 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-18 11:51:58.395 [main] DEBUG nextflow.Session - Session uuid: 7a686a11-b680-4bd3-a6ac-8ca3e51b41ae
+Jan-18 11:51:58.395 [main] DEBUG nextflow.Session - Run name: admiring_payne
+Jan-18 11:51:58.396 [main] DEBUG nextflow.Session - Executor pool size: 8
+Jan-18 11:51:58.412 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (17:55 CEST)
+  System: Linux 5.11.0-46-generic
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 11.0.13+8-Ubuntu-0ubuntu1.20.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 9365@triggor-computer [127.0.1.1]
+  CPUs: 8 - Mem: 31.1 GB (25.5 GB) - Swap: 2 GB (2 GB)
+Jan-18 11:51:58.422 [main] DEBUG nextflow.Session - Work-dir: /home/igor/Programming/CRG/helix_kmer_counter/work [ext2/ext3]
+Jan-18 11:51:58.422 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/igor/Programming/CRG/helix_kmer_counter/bin
+Jan-18 11:51:58.427 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-18 11:51:58.433 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-18 11:51:58.448 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 11:51:58.490 [main] DEBUG nextflow.Session - Session start invoked
+Jan-18 11:51:58.837 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-18 11:51:58.891 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 11:51:58.891 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 11:51:58.893 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jan-18 11:51:58.896 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=31.1 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Jan-18 11:51:58.908 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-18 11:51:58.956 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 11:51:58.956 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 11:51:58.958 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-18 11:51:58.958 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-18 11:51:58.960 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: extractSequences, countKmers, findSequences
+Jan-18 11:51:58.961 [main] DEBUG nextflow.Session - Ignite dataflow network (3)
+Jan-18 11:51:58.961 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > findSequences
+Jan-18 11:51:58.961 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > extractSequences
+Jan-18 11:51:58.961 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countKmers
+Jan-18 11:51:58.962 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Jan-18 11:51:58.962 [main] DEBUG nextflow.Session - Session await
+Jan-18 11:51:59.001 [Actor Thread 5] DEBUG nextflow.util.CacheHelper - Unable to get file attributes file: /sample_phobius.txt -- Cause: java.nio.file.NoSuchFileException: /sample_phobius.txt
+Jan-18 11:51:59.030 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-18 11:51:59.033 [Task submitter] INFO  nextflow.Session - [e6/f59a38] Submitted process > findSequences
+Jan-18 11:51:59.063 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: findSequences; status: COMPLETED; exit: 1; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/work/e6/f59a383d394d25696da5c2a086668d]
+Jan-18 11:51:59.077 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'findSequences'
+
+Caused by:
+  Process `findSequences` terminated with an error exit status (1)
+
+Command executed:
+
+  #!/usr/bin/env python
+  from phobius_field_retriever import *
+  
+  if __name__ == "__main__":
+      with open("prediction.txt", 'r') as infile:
+          for line in infile:
+              pred = phobius_short_pred_field_selector(line, "n", False)
+              print(str(pred[0]) + '	' + '	'.join([f"{t[0]} {t[1]}" for t in pred[1]]))
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command error:
+  Traceback (most recent call last):
+    File ".command.sh", line 2, in <module>
+      from phobius_field_retriever import *
+  ModuleNotFoundError: No module named 'phobius_field_retriever'
+
+Work dir:
+  /home/igor/Programming/CRG/helix_kmer_counter/work/e6/f59a383d394d25696da5c2a086668d
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Jan-18 11:51:59.082 [main] DEBUG nextflow.Session - Session await > all process finished
+Jan-18 11:51:59.083 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `findSequences` terminated with an error exit status (1)
+Jan-18 11:51:59.094 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-18 11:51:59.098 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=3ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Jan-18 11:51:59.307 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Jan-18 11:51:59.317 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
