@@ -1,3 +1,0 @@
-2022-01-18 17:27:45	1.6s	sad_keller	ERR	be90c4261bfe23f5ca1922728c925821	fb01382d-3d0b-4d86-af8a-08d18d026d35	nextflow run ../counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
-2022-01-18 17:28:03	1.5s	pensive_caravaggio	ERR	be90c4261bfe23f5ca1922728c925821	29604b9a-c930-42b0-a371-a869bda62086	nextflow run ../counter.nf --pred sample_phobius.txt --fasta test_data/sample_fasta.fa
-2022-01-18 17:28:47	1.4s	angry_descartes	ERR	be90c4261bfe23f5ca1922728c925821	630304e1-607c-4f9c-ac17-eead4f318035	nextflow run ../counter.nf --pred /home/igor/Programming/CRG/helix_kmer_counter/test_data/sample_phobius.txt --fasta /home/igor/Programming/CRG/helix_kmer_counter/test_data/sample_fasta.fa
