@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/home/igor/Programming/CRG/helix_kmer_counter/work/e6/f59a383d394d25696da5c2a086668d/.command.sh", line 2, in <module>
-    from phobius_field_retriever import *
-ModuleNotFoundError: No module named 'phobius_field_retriever'

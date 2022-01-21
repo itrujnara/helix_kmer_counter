@@ -4,9 +4,9 @@ nextflow.enable.dsl = 2
 
 params.kmer = 3
 params.feature = "s"
-params.fasta = "/data/sequence.fa"
-params.pred = "/data/prediction.txt"
-params.outfile = "/results/kmers.txt"
+params.fasta = "data/sequence.fa"
+params.pred = "data/prediction.txt"
+params.outfile = "results/kmers.txt"
 
 process findSequences {
     input:
@@ -19,7 +19,8 @@ process findSequences {
     
     script:
     """
-    python3 ${pyscript} ${pred_file} "seq_ranges.txt" ${feature_id}
+    #!/usr/bin/env bash
+    python3 ${pyscript} ${pred_file} seq_ranges.txt ${feature_id}
     """
 }
 
@@ -35,12 +36,13 @@ process extractSequences {
     script:
     """
     #!/usr/bin/env bash
-    python3 ${pyscript} ${ranges} ${fasta} "seqs.txt"
+    python3 ${pyscript} ${ranges} ${fasta} seqs.txt
     """
 }
 
 process countKmers {
     input:
+    path pyscript
     path seqs
     val kmer
 
@@ -50,7 +52,22 @@ process countKmers {
     script:
     """
     #!/usr/bin/env bash
-    python3 ${pyscript} ${seqs} ${params.outfile} ${kmer}
+    python3 ${pyscript} ${seqs} seq_kmers.txt ${kmer}
+    """
+}
+
+process sumKmers {
+    input:
+    path pyscript
+    path kmers
+
+    output:
+    path "total_kmers.txt"
+
+    script:
+    """
+    #!/usr/bin/env bash
+    python3 ${pyscript} ${kmers} total_kmers.txt
     """
 }
 
@@ -63,12 +80,13 @@ workflow countHelixKmers {
 
     main:
     findscript = params.SCRIPTS + "find_seqs.py"
-    // channel.fromPath(pred).view()
     findSequences(findscript, (params.PARENT + prediction), feature_name)
     extrscript = params.SCRIPTS + "extract_seqs.py"
     extractSequences(extrscript, findSequences.out, (params.PARENT + fasta))
     countscript = params.SCRIPTS + "kmer_count.py"
     countKmers(countscript, extractSequences.out, kmer)
+    sumscript = params.SCRIPTS + "sum_kmers.py"
+    sumKmers(sumscript, countKmers.out)
     
     emit:
     countKmers.out
@@ -76,4 +94,5 @@ workflow countHelixKmers {
 
 workflow {
     countHelixKmers(params.kmer, params.feature, params.pred, params.fasta)
+    // print(countHelixKmers.out)
 }

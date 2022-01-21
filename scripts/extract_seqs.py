@@ -1,7 +1,19 @@
+"""
+This script extracts subsequences from FASTA sequences based on a tab-separated input file (format below).
+Usage: python3 extract_seqs.py [range input filepath] [sequence input filepath] [output filepath]
+Range input format:
+[sequence name]    [subsequence 1 start] [subsequence 1 end]    [...other subsequences]
+[...other sequences]
+Sequence input format: canonical multiFASTA
+Output format:
+[sequence name]    [subsequence 1]    [subsequence 2]    [...other subsequences]
+"""
+
+from multiprocessing.sharedctypes import Value
 import sys
 import itertools
 
-def extract_seqs(seq, ints): # separated to limit indentation
+def read_seqs(seq, ints): # separated to limit indentation
     seqs = []
     current = ""
     bpts = list(itertools.chain.from_iterable(ints))
@@ -17,7 +29,7 @@ def extract_seqs(seq, ints): # separated to limit indentation
     return seqs
 
 def extract_seqs(predfile, fastafile, outfile):
-    with open(fastafile, 'r') as inseqs: # todo: change file name to "inseqs.fa" after pasting into Nextflow
+    with open(fastafile, 'r') as inseqs:
         with open(predfile, 'r') as preds:
             with open(outfile, 'w') as out:
                 for pred in preds:
@@ -27,7 +39,14 @@ def extract_seqs(predfile, fastafile, outfile):
                     found = False
                     for sl in inseqs:
                         if found:
-                            out.write(uid + '\t' + '\t'.join(extract_seqs(sl, ints)) + '\n')
+                            out.write(uid + '\t' + '\t'.join(read_seqs(sl, ints)) + '\n')
                             break
                         elif sl.split()[0][1:] == uid:
                             found = True
+
+if __name__ == "__main__":
+    try:
+        predfile, fastafile, outfile = sys.argv[1:4]
+        extract_seqs(predfile, fastafile, outfile)
+    except ValueError:
+        raise SystemExit("Check arguments. Usage: python3 extract_seqs.py [range input filepath] [sequence input filepath] [output filepath]")
