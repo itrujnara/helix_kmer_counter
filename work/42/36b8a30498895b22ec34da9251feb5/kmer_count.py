@@ -1,0 +1,1 @@
+/home/igor/Programming/CRG/helix_kmer_counter/scripts/kmer_count.py

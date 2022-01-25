@@ -1,0 +1,66 @@
+Jan-25 18:08:14.295 [main] DEBUG nextflow.cli.Launcher - $> nextflow run counter.nf --pred test_data/sample_phobius.txt --fasta test_data/sample_fasta.fa
+Jan-25 18:08:14.348 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+Jan-25 18:08:14.363 [main] INFO  nextflow.cli.CmdRun - Launching `counter.nf` [sleepy_booth] - revision: 067dcf2d7b
+Jan-25 18:08:14.373 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/igor/Programming/CRG/helix_kmer_counter/nextflow.config
+Jan-25 18:08:14.374 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/igor/Programming/CRG/helix_kmer_counter/nextflow.config
+Jan-25 18:08:14.390 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jan-25 18:08:14.856 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/home/igor/.nextflow/plugins
+Jan-25 18:08:14.857 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-25 18:08:14.863 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-25 18:08:14.864 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-25 18:08:14.866 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-25 18:08:14.873 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-25 18:08:14.907 [main] DEBUG nextflow.Session - Session uuid: a26f0439-9a99-45f3-870b-e7f1e40cea90
+Jan-25 18:08:14.907 [main] DEBUG nextflow.Session - Run name: sleepy_booth
+Jan-25 18:08:14.908 [main] DEBUG nextflow.Session - Executor pool size: 8
+Jan-25 18:08:14.928 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (17:55 CEST)
+  System: Linux 5.13.0-25-generic
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 11.0.13+8-Ubuntu-0ubuntu1.20.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 7079@triggor-computer [127.0.1.1]
+  CPUs: 8 - Mem: 31.1 GB (25.6 GB) - Swap: 2 GB (2 GB)
+Jan-25 18:08:14.942 [main] DEBUG nextflow.Session - Work-dir: /home/igor/Programming/CRG/helix_kmer_counter/work [ext2/ext3]
+Jan-25 18:08:14.951 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-25 18:08:14.959 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-25 18:08:14.978 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-25 18:08:15.029 [main] DEBUG nextflow.Session - Session start invoked
+Jan-25 18:08:15.329 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-25 18:08:15.412 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-25 18:08:15.412 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-25 18:08:15.415 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jan-25 18:08:15.419 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=31.1 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Jan-25 18:08:15.434 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Jan-25 18:08:15.485 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-25 18:08:15.485 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-25 18:08:15.490 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-25 18:08:15.490 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-25 18:08:15.494 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-25 18:08:15.494 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-25 18:08:15.497 [main] INFO  nextflow.script.BaseScript - [DataflowVariable(value=null)]
+Jan-25 18:08:15.499 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: countHelixKmers:sumKmers, countHelixKmers:findSequences, extractSequences, countHelixKmers:extractSequences, countKmers, countHelixKmers:countKmers, sumKmers, findSequences
+Jan-25 18:08:15.499 [main] DEBUG nextflow.Session - Ignite dataflow network (4)
+Jan-25 18:08:15.500 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:findSequences
+Jan-25 18:08:15.500 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:extractSequences
+Jan-25 18:08:15.501 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:countKmers
+Jan-25 18:08:15.501 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > countHelixKmers:sumKmers
+Jan-25 18:08:15.501 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Jan-25 18:08:15.501 [main] DEBUG nextflow.Session - Session await
+Jan-25 18:08:15.617 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-25 18:08:15.621 [Task submitter] INFO  nextflow.Session - [e6/9276e3] Submitted process > countHelixKmers:findSequences
+Jan-25 18:08:15.653 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: countHelixKmers:findSequences; status: COMPLETED; exit: 0; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/work/e6/9276e3fb72f3e459a8eb43b9203ee6]
+Jan-25 18:08:15.677 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-25 18:08:15.678 [Task submitter] INFO  nextflow.Session - [18/64db10] Submitted process > countHelixKmers:extractSequences
+Jan-25 18:08:15.753 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: countHelixKmers:extractSequences; status: COMPLETED; exit: 0; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/work/18/64db108654d70ba3522b5a01ef9c89]
+Jan-25 18:08:15.764 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-25 18:08:15.765 [Task submitter] INFO  nextflow.Session - [8d/c277c8] Submitted process > countHelixKmers:countKmers
+Jan-25 18:08:15.794 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: countHelixKmers:countKmers; status: COMPLETED; exit: 0; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/work/8d/c277c8e83be72aae959a73eeac70a5]
+Jan-25 18:08:15.800 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-25 18:08:15.801 [Task submitter] INFO  nextflow.Session - [e6/0eeab9] Submitted process > countHelixKmers:sumKmers
+Jan-25 18:08:15.829 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: countHelixKmers:sumKmers; status: COMPLETED; exit: 0; error: -; workDir: /home/igor/Programming/CRG/helix_kmer_counter/work/e6/0eeab96976b4fa64fdf914d5d628e2]
+Jan-25 18:08:15.831 [main] DEBUG nextflow.Session - Session await > all process finished
+Jan-25 18:08:15.831 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-25 18:08:15.836 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=4; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=29ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Jan-25 18:08:15.866 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Jan-25 18:08:15.877 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

@@ -1,0 +1,1 @@
+/home/igor/Programming/CRG/helix_kmer_counter/work/57/3cce821e3b28426bcb19f103616dc0/seq_kmers.txt

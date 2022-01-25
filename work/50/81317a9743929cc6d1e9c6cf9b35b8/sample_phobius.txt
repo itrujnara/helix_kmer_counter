@@ -1,0 +1,1 @@
+/home/igor/Programming/CRG/helix_kmer_counter/test_data/sample_phobius.txt
