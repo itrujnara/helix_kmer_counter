@@ -2,3 +2,4 @@
 /work/*
 /tmp/*
 .nextflow.log*
+/__pycache__/
