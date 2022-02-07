@@ -7,10 +7,12 @@ nextflow.enable.dsl = 2
 
 params.kmer = 3
 params.feature = "s"
+params.pairing = "standard"
 params.fasta = "data/sequence.fa"
 params.pred = "data/prediction.txt"
 params.outdir = "results/"
 
+/*
 process findSequences {
     input:
     path pyscript
@@ -21,8 +23,9 @@ process findSequences {
     path "seq_ranges_*.txt", emit: ranges
     
     script:
+    suffix = "seq_ranges_${pred_file.getFileName()}"
     """
-    python3 ${pyscript} ${pred_file} "seq_ranges_${pred_file.getFileName()}" ${feature_id}
+    python3 ${pyscript} ${pred_file} ${suffix} ${feature_id}
     """
 }
 
@@ -36,10 +39,12 @@ process extractSequences {
     path "seqs_*.txt"
     
     script:
+    suffix = "${ranges.getFileName()}".split('\\.')[0] + "__" + "${fasta.getFileName()}".split('\\.')[0] + ".txt"
     """
-    python3 ${pyscript} ${ranges} ${fasta} "seqs_${fasta.getFileName().toString().split("\\.")[0]}_${ranges.getFileName().toString().split("\\.")[0]}.txt"
+    python3 ${pyscript} ${ranges} ${fasta} ${suffix}
     """
 }
+*/
 
 process findAndExtractPair {
     input:
@@ -52,9 +57,10 @@ process findAndExtractPair {
     path "seqs_pair_*.txt"
 
     script:
+    suffix = "seqs_pair_${predFile.getFileName().toString().split("\\.")[0]}_${fastaFile.getFileName().toString().split("\\.")[0]}.txt"
     """
     python3 ${findscript} ${predFile} seqs.txt ${featureID}
-    python3 ${extrscript} seqs.txt ${fastaFile} "seqs_pair_${predFile.getFileName().toString().split("\\.")[0]}_${fastaFile.getFileName().toString().split("\\.")[0]}.txt"
+    python3 ${extrscript} seqs.txt ${fastaFile} 
     """
 
 }
@@ -106,10 +112,17 @@ workflow countHelixKmers {
     countscript = params.SCRIPTS + "kmer_count.py"
     sumscript = params.SCRIPTS + "sum_kmers.py"
 
-    // channel definitions 
-    Channel.fromPath(params.pred).set{ chPred }
-    Channel.fromPath(params.fasta).set{ chSeq }
-    pairer(prediction, fasta).set{ chPairs }
+    // channel definitions
+    pairedInputs = ""
+    if(params.pairing == "standard"){
+        //Channel.fromPath(params.pred).set{ chPred }
+        //Channel.fromPath(params.fasta).set{ chSeq }
+        pairedInputs = Channel.fromFilePairs(prediction + ".{txt,fa}", flat: true)
+    } else {
+        pairedInputs = pairer(prediction, fasta)
+    }
+    
+    
 
     findSequences(findscript, chPred, featName)
     extractSequences(extrscript, findSequences.out, chSeq)
