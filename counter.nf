@@ -1,9 +1,23 @@
 #!/usr/bin/env nextflow
 
-include { ch_pairer } from "./channel_pairer.nf"
-include { pairer } from "./pairer.nf"
-
 nextflow.enable.dsl = 2
+
+
+params.help = false
+
+
+// this prints the help in case you use --help parameter in the command line and it stops the pipeline
+if (params.help) {
+    log.info "HERE THE HELP WILL BE WRITTEN LIKE THIS :"
+	log.info "This pipeline computes ..... "
+	log.info "mention that there is the for the pred file and the fasta file to have the same sequences id in the same order"
+	log.info "explain the use of each flag and espacially the behaviour of --pairing  like the necessity of files to be .txt or .fa"
+	log.info "and the fact that using the standard behaviour the fasta flag becomes useless because both input types have to be inside the same glob pattern specificity    TEMPORARY MAYBE FIXABLE"
+}
+
+
+
+// params section
 
 params.kmer = 3
 params.feature = "s"
@@ -11,6 +25,12 @@ params.pairing = "standard"
 params.fasta = "data/sequence.fa"
 params.pred = "data/prediction.txt"
 params.outdir = "results/"
+
+
+// include section
+
+include { ch_pairer } from "${params.PIPES}channel_pairer.nf"
+include { pairer } from "${params.PIPES}pairer.nf"
 
 /*
 process findSequences {
@@ -21,13 +41,16 @@ process findSequences {
     
     output:
     path "seq_ranges_*.txt", emit: ranges
-    
+	stdout emit: standardout                    // debug porpouses    
+
     script:
-    suffix = "seq_ranges_${pred_file.getFileName()}"
+    suffix = "seq_ranges_${pred_file.getFileName()}".split('\\.')[0] + ".txt"
     """
     python3 ${pyscript} ${pred_file} ${suffix} ${feature_id}
     """
 }
+
+
 
 process extractSequences {
     input:
@@ -36,34 +59,39 @@ process extractSequences {
     path fasta
     
     output:
-    path "seqs_*.txt"
+    //path "seqs_*.txt"
+	stdout emit: standardout                    // debug porpouses
     
     script:
     suffix = "${ranges.getFileName()}".split('\\.')[0] + "__" + "${fasta.getFileName()}".split('\\.')[0] + ".txt"
     """
-    python3 ${pyscript} ${ranges} ${fasta} ${suffix}
+	python3 ${pyscript} ${ranges} ${fasta} ${suffix}
     """
 }
 */
 
-process findAndExtractPair {
-    input:
+process findAndExtractSeq {
+    
+	input:
     path findscript
     path extrscript
-    tuple val(id) path(predFile) path(fastaFile)
+    tuple val(matcher), path(predFile), path(fastaFile)
     val featureID
 
     output:
-    path "seqs_pair_*.txt"
+    path "seqs_pair_*.txt", emit: sub_seqs
+	stdout emit: standardout
 
     script:
-    suffix = "seqs_pair_${predFile.getFileName().toString().split("\\.")[0]}_${fastaFile.getFileName().toString().split("\\.")[0]}.txt"
+	suffix = "seqs_${matcher}.txt"
+	prefix = "${predFile}".split("${matcher}")[0]						// used later on at the final step for the output name
     """
-    python3 ${findscript} ${predFile} seqs.txt ${featureID}
-    python3 ${extrscript} seqs.txt ${fastaFile} 
+    python3 ${findscript} ${predFile} ${suffix} ${featureID}
+    python3 ${extrscript} ${suffix} ${fastaFile} "seqs_pair_${matcher}.txt"
+	echo ${prefix}
     """
-
 }
+
 
 process countKmers {
     input:
@@ -72,12 +100,13 @@ process countKmers {
     val kmer
 
     output:
-    path "seq_kmers_*.txt"
-    
+    path "seq_kmers_*.txt", emit: kmers_counts
+    stdout emit: standardout                    // debug porpouses
+
     script:
+	suffix = "${seqs.getFileName()}".split("seqs_pair_")[1]
     """
-    #!/usr/bin/env bash
-    python3 ${pyscript} ${seqs} "seq_kmers_${seqs.getFileName()}.txt" ${kmer}
+    python3 ${pyscript} ${seqs} "seq_kmers_${suffix}" ${kmer}
     """
 }
 
@@ -87,14 +116,15 @@ process sumKmers {
     input:
     path pyscript
     path kmers
+	val suffix
 
     output:
-    path "total_kmers.txt"
+    path "${final_name}", emit: tot_kemers
 
     script:
+	final_name =  "total_kmers_" + "${suffix}_".replaceAll("\n", "") + "${kmers}".split("seq_kmers_")[1]
     """
-    #!/usr/bin/env bash
-    python3 ${pyscript} ${kmers} total_kmers.txt
+    python3 ${pyscript} ${kmers} ${final_name}
     """
 }
 
@@ -115,23 +145,22 @@ workflow countHelixKmers {
     // channel definitions
     pairedInputs = ""
     if(params.pairing == "standard"){
-        //Channel.fromPath(params.pred).set{ chPred }
-        //Channel.fromPath(params.fasta).set{ chSeq }
-        pairedInputs = Channel.fromFilePairs(prediction + ".{txt,fa}", flat: true)
+		pairedInputs = Channel.fromFilePairs( prediction + ".{txt,fa}").map{ [it[0], it[1][1], it[1][0]] }	// not to have list of lists and fa comes before txt
     } else {
-        pairedInputs = pairer(prediction, fasta)
+		pairer(prediction, fasta)
+        pairedInputs = pairer.out.right_pairs
     }
+	findAndExtractSeq(findscript, extrscript, pairedInputs, featName)
+    countKmers(countscript, findAndExtractSeq.out.sub_seqs, kmer)
+	sumKmers(sumscript, countKmers.out.kmers_counts, findAndExtractSeq.out.standardout)
     
-    
-
-    findSequences(findscript, chPred, featName)
-    extractSequences(extrscript, findSequences.out, chSeq)
-    countKmers(countscript, extractSequences.out, kmer)
-    sumKmers(sumscript, countKmers.out)
-    emit:
-    sumKmers.out
+	emit:
+    final_out = sumKmers.out.tot_kemers
+	//stdout = countKmers.out.kmers_counts // for debug porpouses
 }
 
 workflow {
     countHelixKmers(params.kmer, params.feature, params.pred, params.fasta)
+	countHelixKmers.out.final_out.view()
+	//countHelixKmers.out.stdout.view()		// for debug porpouses
 }
