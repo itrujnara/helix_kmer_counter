@@ -30,6 +30,8 @@ def count_kmers(infile, outfile, k_len):
     with open(outfile, 'w') as f:
         for it in res:
             f.write("$ " + it[0] + '\n')
+            f.write(f"$ Total: {sum(it[1].values())}\n")
+            f.write(f"$ Unique: {len(it[1])}\n")
             for k, v in sorted(it[1].items(), key = lambda i: i[1], reverse = True):
                 f.write(f"{k} {v}\n")
 

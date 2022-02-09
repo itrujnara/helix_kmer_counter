@@ -20,9 +20,9 @@ def sum_kmers(infile, outfile):
         totals = dd(int)
         seqs = 0
         for line in infile:
-            if line[0] == "$":
+            if line.startswith("$ U"):
                 seqs += 1
-            else:
+            elif not line.startswith('$'):
                 k, v = line.split()
                 totals[k] += int(v)
     with open(outfile, 'w') as outfile:
