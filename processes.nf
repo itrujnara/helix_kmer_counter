@@ -26,7 +26,7 @@ process extractSequences {
     path "seqs_*.fa"
     
     script:
-    outname = "${ranges.getFileName()}".split('\\.')[0] + "__" + "${fasta.getFileName()}".split('\\.')[0] + ".fa"
+    outname = "seqs_${ranges.getFileName()}".split('\\.')[0] + "__" + "${fasta.getFileName()}".split('\\.')[0] + ".fa"
     """
     python3 ${pyscript} ${ranges} ${fasta} ${outname}
     """
@@ -63,7 +63,7 @@ process countKmers {
     script:
     """
     #!/usr/bin/env bash
-    python3 ${pyscript} ${seqs} "seq_kmers_${seqs.getFileName()}.txt" ${kmer}
+    python3 ${pyscript} ${seqs} "seq_kmers_${seqs.getFileName().toString().split("\\.")[0]}.txt" ${kmer}
     """
 }
 

@@ -5,8 +5,7 @@ Range input format:
 [sequence name]    [subsequence 1 start] [subsequence 1 end]    [...other subsequences]
 [...other sequences]
 Sequence input format: canonical multiFASTA
-Output format:
-[sequence name]    [subsequence 1]    [subsequence 2]    [...other subsequences]
+Output format: canonical multiFASTA (1 entry per subsequence)
 """
 
 from multiprocessing.sharedctypes import Value
@@ -39,7 +38,11 @@ def extract_seqs(predfile, fastafile, outfile):
                     found = False
                     for sl in inseqs:
                         if found:
-                            out.write(uid + '\t' + '\t'.join(read_seqs(sl, ints)) + '\n')
+                            c = 1
+                            for seq in read_seqs(sl, ints):
+                                out.write(f">{uid} count={c}\n")
+                                out.write(seq + '\n')
+                                c += 1
                             break
                         elif sl.split()[0][1:] == uid:
                             found = True
