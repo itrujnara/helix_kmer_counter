@@ -1,107 +1,24 @@
 #!/usr/bin/env nextflow
 
-include { ch_pairer } from "./channel_pairer.nf"
-include { pairer } from "./pairer.nf"
-
 nextflow.enable.dsl = 2
+
+params.outdir = "results/"
+
+// include { ch_pairer } from "./channel_pairer.nf"
+include { pairer } from "./pairer.nf"
+include { findSequences; extractSequences; findAndExtractPair; countKmers; sumKmers } from "./processes.nf" addParams(outdir: "${params.outdir}")
 
 params.kmer = 3
 params.feature = "s"
-params.pairing = "standard"
+params.pairing = "none"
 params.fasta = "data/sequence.fa"
 params.pred = "data/prediction.txt"
-params.outdir = "results/"
-
-/*
-process findSequences {
-    input:
-    path pyscript
-    path pred_file
-    val feature_id
-    
-    output:
-    path "seq_ranges_*.txt", emit: ranges
-    
-    script:
-    suffix = "seq_ranges_${pred_file.getFileName()}"
-    """
-    python3 ${pyscript} ${pred_file} ${suffix} ${feature_id}
-    """
-}
-
-process extractSequences {
-    input:
-    path pyscript
-    path ranges
-    path fasta
-    
-    output:
-    path "seqs_*.txt"
-    
-    script:
-    suffix = "${ranges.getFileName()}".split('\\.')[0] + "__" + "${fasta.getFileName()}".split('\\.')[0] + ".txt"
-    """
-    python3 ${pyscript} ${ranges} ${fasta} ${suffix}
-    """
-}
-*/
-
-process findAndExtractPair {
-    input:
-    path findscript
-    path extrscript
-    tuple val(id) path(predFile) path(fastaFile)
-    val featureID
-
-    output:
-    path "seqs_pair_*.txt"
-
-    script:
-    suffix = "seqs_pair_${predFile.getFileName().toString().split("\\.")[0]}_${fastaFile.getFileName().toString().split("\\.")[0]}.txt"
-    """
-    python3 ${findscript} ${predFile} seqs.txt ${featureID}
-    python3 ${extrscript} seqs.txt ${fastaFile} 
-    """
-
-}
-
-process countKmers {
-    input:
-    path pyscript
-    path seqs
-    val kmer
-
-    output:
-    path "seq_kmers_*.txt"
-    
-    script:
-    """
-    #!/usr/bin/env bash
-    python3 ${pyscript} ${seqs} "seq_kmers_${seqs.getFileName()}.txt" ${kmer}
-    """
-}
-
-process sumKmers {
-    publishDir params.outdir, mode: "move", overwrite: false
-
-    input:
-    path pyscript
-    path kmers
-
-    output:
-    path "total_kmers.txt"
-
-    script:
-    """
-    #!/usr/bin/env bash
-    python3 ${pyscript} ${kmers} total_kmers.txt
-    """
-}
 
 workflow countHelixKmers {
     take:
     kmer
     featName
+    pairing
     prediction
     fasta
 
@@ -112,26 +29,39 @@ workflow countHelixKmers {
     countscript = params.SCRIPTS + "kmer_count.py"
     sumscript = params.SCRIPTS + "sum_kmers.py"
 
-    // channel definitions
-    pairedInputs = ""
-    if(params.pairing == "standard"){
-        //Channel.fromPath(params.pred).set{ chPred }
-        //Channel.fromPath(params.fasta).set{ chSeq }
-        pairedInputs = Channel.fromFilePairs(prediction + ".{txt,fa}", flat: true)
-    } else {
-        pairedInputs = pairer(prediction, fasta)
-    }
-    
-    
+    if(pairing == "none") {
+        // match every prediction against every sequence file
+        Channel.fromPath(prediction).set{ chPred }
+        Channel.fromPath(fasta).set{ chSeq }
 
-    findSequences(findscript, chPred, featName)
-    extractSequences(extrscript, findSequences.out, chSeq)
-    countKmers(countscript, extractSequences.out, kmer)
-    sumKmers(sumscript, countKmers.out)
+        findSequences(findscript, chPred, featName)
+        extractSequences(extrscript, findSequences.out, chSeq)
+        countKmers(countscript, extractSequences.out, kmer)
+        sumKmers(sumscript, countKmers.out)
+    } else if(pairing == "generic") {
+        // naive - match files by name, with different extensions
+        Channel.fromFilePairs(prediction + ".{txt,fa}", flat: true).set{ chPairs }
+
+        findAndExtractPair(findscript, extrscript, chPairs, featName)
+        countKmers(countscript, findAndExtractPair.out, kmer)
+        sumKmers(sumscript, countKmers.out)
+    } else if(pairing == "reverse") {
+        // match files using the glob file pairer
+        Channel.fromPath(prediction).set{ chPred }
+        Channel.fromPath(fasta).set{ chSeq }
+
+        ch_pairer(chPred, chSeq).set{ chPairs }
+        findAndExtractPair(findscript, extrscript, chPairs, featName)
+        countKmers(countscript, findAndExtractPair.out, kmer)
+        sumKmers(sumscript, countKmers.out)
+    } else {
+        println("Unknown pairing mode!")
+    }
+
     emit:
     sumKmers.out
 }
 
 workflow {
-    countHelixKmers(params.kmer, params.feature, params.pred, params.fasta)
+    countHelixKmers(params.kmer, params.feature, params.pairing, params.pred, params.fasta)
 }
