@@ -1,0 +1,3 @@
+$ Aggregated k-mers from 0 sequences
+$ Total kmers found: 0
+$ Unique kmers found: 0
