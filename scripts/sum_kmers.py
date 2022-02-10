@@ -1,3 +1,4 @@
+# Made by Igor Trujnara (github.com/igik20/)
 """
 This script sums k-mer occurrences from multiple sequences.
 Usage: python3 sum_kmers.py [input filepath] [output filepath]

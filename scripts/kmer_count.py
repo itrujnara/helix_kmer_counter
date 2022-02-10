@@ -1,3 +1,4 @@
+# Made by Igor Trujnara (github.com/igik20/)
 """
 This script counts the occurrences of every k-mer of set length in all subsequences in a file, grouped by sequence ID.
 Usage: python3 kmer_count.py [input filepath] [output filepath] [k-mer size]

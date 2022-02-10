@@ -1,4 +1,5 @@
 #!/usr/bin/env nextflow
+// Made by: Igor Trujnara, Alessio Vignoli
 
 nextflow.enable.dsl = 2
 
@@ -102,7 +103,7 @@ process findAndExtractSeq {
 	stdout emit: standardout
 
     script:
-	suffix = "seqs_${matcher}.fa"
+	suffix = "seqs_${matcher}.txt"
 	prefix = "${predFile}".split("${matcher}")[0].split('\\.')[0]						// used later on at the final step for the output name
     """
     python3 ${findscript} ${predFile} ${suffix} ${featureID}
@@ -134,7 +135,7 @@ process countKmers {
 process sumKmers {
     container params.CONTAINER
     publishDir params.outdir, mode: "move", overwrite: false
-    // scratch true
+    scratch true
 
     input:
     path pyscript

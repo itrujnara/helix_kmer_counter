@@ -1,3 +1,4 @@
+# Made by Igor Trujnara (github.com/igik20/)
 """
 This script finds subsequence ranges for a feature in a Phobius short output file.
 Usage: python3 find_seqs.py [input filepath] [output filepath] [feature symbol]

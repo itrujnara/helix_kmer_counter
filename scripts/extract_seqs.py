@@ -1,3 +1,4 @@
+# Made by Igor Trujnara (github.com/igik20/)
 """
 This script extracts subsequences from FASTA sequences based on a tab-separated input file (format below).
 Usage: python3 extract_seqs.py [range input filepath] [sequence input filepath] [output filepath]

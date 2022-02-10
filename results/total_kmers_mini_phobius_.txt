@@ -1,0 +1,34 @@
+# Aggregated k-mers from 4 sequences
+# Total kmers found: 31
+# Unique kmers found: 31
+VAV 1
+AVL 1
+VLG 1
+LGA 1
+GAV 1
+AVA 1
+VAI 1
+AIG 1
+IGL 1
+GLM 1
+LML 1
+MLA 1
+LAW 1
+AWL 1
+WLI 1
+LIW 1
+IWA 1
+WAE 1
+AEV 1
+EVV 1
+VVS 1
+VSF 1
+PPS 1
+PSS 1
+SSS 1
+SSP 1
+SPR 1
+PRR 1
+RRS 1
+RSA 1
+SAS 1

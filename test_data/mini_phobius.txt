@@ -1,0 +1,2 @@
+UniRef50_A0A2H0LIF0            23  0 o67-n-91i
+UniRef50_A0A2A9MDD0             5  0 o28-n-39i
