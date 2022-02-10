@@ -8,11 +8,32 @@ params.help = false
 
 // this prints the help in case you use --help parameter in the command line and it stops the pipeline
 if (params.help) {
-    log.info "HERE THE HELP WILL BE WRITTEN LIKE THIS :"
-	log.info "This pipeline computes ..... "
-	log.info "mention that there is the for the pred file and the fasta file to have the same sequences id in the same order"
-	log.info "explain the use of each flag and espacially the behaviour of --pairing  like the necessity of files to be .txt or .fa"
-	log.info "and the fact that using the standard behaviour the fasta flag becomes useless because both input types have to be inside the same glob pattern specificity    TEMPORARY MAYBE FIXABLE"
+	log.info "This pipeline computes kmers of length specified by the --kmer flag. "
+    log.info "The input is two types of files: one FASTA file given with the --fasta option and one Phobius prediction file given with --pred."
+    log.info "The prediction file is a direct stdout redirection of Phobius with -short."
+    log.info "This means that for each FASTA file each sequence is found in the associated prediction file."
+    log.info "The order of FASTA and prediction files does not matter."
+    log.info ""
+    log.info "--pairing flag, when given, no matter the content, will always use the non-canonical pairing algorithm (explained afterwards)."
+    log.info "--pairing \"standard\" is the only case when the flag is explicitly mentioned, and in this case the canonical pairing algorithm is used."
+    log.info "Not mentioning the pairing flag will use the canonical pairing scheme."
+    log.info "Canonical pairing scheme:"
+    log.info "The glob pattern in the --pred flag has to encapsulate also the FASTA files."
+    log.info "e.g. predfile = sample1.txt, sample2.txt  fastafile = sample1.fa, sample2.fa"
+    log.info "In this case the --pred flag will be --pred \"*.txt\" "
+    log.info "Since the names are identical, the pairs generated will be sample1.txt with sample1.fa etc."
+    log.info "WARNING: .txt and .fa must be used in this case. File names cannot contain other dots."
+    log.info "Non-canonical pairing scheme:"
+    log.info "In this case the pred file and the FASTA file name can be whatever. The only thing that links them is the content matched by the asterisk."
+    log.info "e.g. predfile = sample1.txt, sample2.txt  fastafile = sample_1.fasta, sample_2.fasta"
+    log.info "In this case, the flags will be --pred \"sample*.txt\" --fasta \"sample_*.fasta\""
+    log.info "WARNING: Only one asterisk is recognized as glob pattern."
+    log.info ""
+    log.info "The last flag is --feature. It controls which type of phobius prediction feature is extracted. Possible ones are:"
+    log.info "default is s for special helix, all the possible are: [c, i, o, -, n, s, l]  c = signal peptide, i = inside membrane(cytoplasm),"
+    log.info "o = outside membrane, - = helix (in phobius originalmodel), (only in phobius-M7or later) => -n- = normal-helix"
+    log.info "s- = special-helix and -l- = loop-inramembrane"
+    log.info "they have to be given to the pipeline in one letter code"
 }
 
 
@@ -25,6 +46,7 @@ params.pairing = "standard"
 params.fasta = "data/sequence.fa"
 params.pred = "data/prediction.txt"
 params.outdir = "results/"
+params.CONTAINER = "python:slim-buster@sha256:fe2971bedd019d952d4458afb1fe4e222ddb810150008c1dee5a068d38bb0e43"
 
 
 // include section
@@ -67,6 +89,7 @@ process extractSequences {
 */
 
 process findAndExtractSeq {
+    container params.CONTAINER
     
 	input:
     path findscript
@@ -90,6 +113,8 @@ process findAndExtractSeq {
 
 
 process countKmers {
+    container params.CONTAINER
+
     input:
     path pyscript
     path seqs
@@ -107,7 +132,9 @@ process countKmers {
 }
 
 process sumKmers {
+    container params.CONTAINER
     publishDir params.outdir, mode: "move", overwrite: false
+    // scratch true
 
     input:
     path pyscript
@@ -115,15 +142,14 @@ process sumKmers {
 	val suffix
 
     output:
-    path "${final_name}", emit: tot_kemers
+    path "total_kmers_*", emit: tot_kemers
     stdout emit: standardout
 
     script:
-	final_name =  "total_kmers_" + "${suffix}_".replaceAll("\n", "") + "${kmers}".split("seq_kmers_")[1]
+	final_name =  "total_kmers_" + "${suffix}_".replaceAll("\n", "") + "${kmers}".split("seq_kmers_")[1].replaceAll("bubba","")
     """
-    echo ${suffix}
-    echo ${kmers}
-    echo python3 ${pyscript} ${kmers} ${final_name}
+    for i in `echo ${kmers}`; do cat \$i >> TMP; done
+    python3 ${pyscript} TMP ${final_name}
     """
 }
 
@@ -155,11 +181,11 @@ workflow countHelixKmers {
     
 	emit:
     final_out = sumKmers.out.tot_kemers
-	stdout = sumKmers.out.standardout // for debug porpouses
+	//stdout = sumKmers.out.standardout // for debug porpouses
 }
 
 workflow {
     countHelixKmers(params.kmer, params.feature, params.pred, params.fasta)
 	countHelixKmers.out.final_out.view()
-	countHelixKmers.out.stdout.view()		// for debug porpouses
+	//countHelixKmers.out.stdout.view()		// for debug porpouses
 }
