@@ -40,7 +40,7 @@ def extract_seqs(predfile, fastafile, outfile):
                         if found:
                             c = 1
                             for seq in read_seqs(sl, ints):
-                                out.write(f">{uid} count={c}\n")
+                                out.write(f">{uid}_{c}\n")
                                 out.write(seq + '\n')
                                 c += 1
                             break

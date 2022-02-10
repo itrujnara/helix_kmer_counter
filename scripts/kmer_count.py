@@ -20,7 +20,7 @@ def count_kmers(infile, outfile, k_len):
         for line in inf:
             if line[0] == '>':
                 l = line.rstrip().split()
-                uid = l[0][1:] + "_" + l[1][6:]
+                uid = l[0][1:]
             else:
                 seq = line.rstrip()
                 counts = dd(int)
