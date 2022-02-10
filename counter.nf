@@ -80,7 +80,7 @@ process findAndExtractSeq {
 
     script:
 	suffix = "seqs_${matcher}.fa"
-	prefix = "${predFile}".split('\\.')[0]						// used later on at the final step for the output name
+	prefix = "${predFile}".split("${matcher}")[0].split('\\.')[0]						// used later on at the final step for the output name
     """
     python3 ${findscript} ${predFile} ${suffix} ${featureID}
     python3 ${extrscript} ${suffix} ${fastaFile} "seqs_pair_${matcher}.fa"
