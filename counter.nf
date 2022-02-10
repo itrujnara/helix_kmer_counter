@@ -123,7 +123,7 @@ process sumKmers {
     """
     echo ${suffix}
     echo ${kmers}
-    python3 ${pyscript} ${kmers} ${final_name}
+    echo python3 ${pyscript} ${kmers} ${final_name}
     """
 }
 
@@ -151,7 +151,7 @@ workflow countHelixKmers {
     }
 	findAndExtractSeq(findscript, extrscript, pairedInputs, featName)
     countKmers(countscript, findAndExtractSeq.out.sub_seqs, kmer)
-	sumKmers(sumscript, countKmers.out.kmers_counts, findAndExtractSeq.out.standardout)
+	sumKmers(sumscript, countKmers.out.kmers_counts.collect(), findAndExtractSeq.out.standardout.last())
     
 	emit:
     final_out = sumKmers.out.tot_kemers
